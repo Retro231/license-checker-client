@@ -1,8 +1,9 @@
 /** Fuction to get search result from api */
 export const getSearchResult = async (companyName) => {
+  const encodedInput = encodeURIComponent(companyName);
   try {
     const response = await fetch(
-      `http://192.168.0.104:3000/company/${companyName}`
+      `http://192.168.0.104:3000/company/${encodedInput}`
     );
 
     if (!response.ok) {

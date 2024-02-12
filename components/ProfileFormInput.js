@@ -8,6 +8,9 @@ const ProfileFormInput = ({
   handleInputChange,
   placeholder,
   keyboardType,
+  handleFocus,
+  handleBlur,
+  handleSubmit,
 }) => {
   return (
     <View style={{ marginVertical: 2 }}>
@@ -19,7 +22,8 @@ const ProfileFormInput = ({
           color: "#676767",
         }}
       >
-        {title}: <Text>({require ? "require" : "optional"})</Text>
+        {title}:{" "}
+        <Text style={{ color: "red" }}>{require ? "* require" : ""}</Text>
       </Text>
       <TextInput
         style={{
@@ -32,7 +36,11 @@ const ProfileFormInput = ({
         onChangeText={handleInputChange}
         value={value}
         placeholder={placeholder}
-        keyboardType={"default"}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        keyboardType={keyboardType}
+        enterKeyHint={title === "Company" ? "search" : "enter"}
+        onSubmitEditing={handleSubmit}
       />
     </View>
   );

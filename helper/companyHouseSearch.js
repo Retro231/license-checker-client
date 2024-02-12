@@ -1,7 +1,8 @@
 const getData = async (name) => {
+  const encodedInput = encodeURIComponent(name);
   try {
     const response = await fetch(
-      `http://192.168.0.104:3000/companyhouse/${name}`
+      `http://192.168.0.104:3000/companyhouse/${encodedInput}`
     );
 
     if (!response.ok) {
@@ -27,7 +28,7 @@ const capitalizeEachWord = (sentence) => {
 
 const getAdditoinalInfo = async (name) => {
   const response = await getData(name);
-  const data = response.data.items;
+  const data = response?.data.items;
   let uppercase = name.toUpperCase();
   let lowercase = name.toLowerCase();
   let capitalizedSentence = capitalizeEachWord(name);
@@ -40,7 +41,7 @@ const getAdditoinalInfo = async (name) => {
       title === lowercase ||
       title === capitalizedSentence
     ) {
-      const status = data[i].company_status;
+      const status = capitalizeEachWord(data[i].company_status);
       const address_snippet = data[i].address_snippet;
 
       return { status, address_snippet };

@@ -10,6 +10,7 @@ export const homeOptions = [
       backgroundColor: "rgba(22, 210, 41, 0.3)",
     },
     color: "rgba(22, 210, 41,1)",
+    caption: "active",
   },
   {
     id: 2,
@@ -22,19 +23,20 @@ export const homeOptions = [
       backgroundColor: "rgba(0, 178, 255, 0.3)",
     },
     color: "rgba(0, 178, 255,1)",
+    caption: "new",
   },
-  {
-    id: 3,
-    icon: "sync",
-    title: "License Updated",
-    value: "12,345",
-    valueIndicatorUp: "arrow-drop-up",
-    valueIndicatordown: "arrow-drop-down",
-    style: {
-      backgroundColor: "rgba(235, 255, 0, 0.3)",
-    },
-    color: "#FF9900",
-  },
+  // {
+  //   id: 3,
+  //   icon: "sync",
+  //   title: "License Updated",
+  //   value: "12,345",
+  //   valueIndicatorUp: "arrow-drop-up",
+  //   valueIndicatordown: "arrow-drop-down",
+  //   style: {
+  //     backgroundColor: "rgba(235, 255, 0, 0.3)",
+  //   },
+  //   color: "#FF9900",
+  // },
   {
     id: 4,
     icon: "close",
@@ -46,5 +48,6 @@ export const homeOptions = [
       backgroundColor: "rgba(255, 37, 37, 0.3)",
     },
     color: "rgba(255, 37, 37,1)",
+    caption: "remove",
   },
 ];

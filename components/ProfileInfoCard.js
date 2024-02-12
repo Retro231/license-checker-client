@@ -40,13 +40,13 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   subtitle: {
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: 14,
+    fontWeight: "600",
     marginBottom: 4,
     color: "#4B4B4B",
   },
   title: {
-    fontSize: 14,
+    fontSize: 12,
     // color: "#666666",
     color: "#039EBD",
   },

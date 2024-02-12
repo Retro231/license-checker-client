@@ -14,7 +14,7 @@ const NewsCard = ({ link, title, summary }) => {
         <TouchableOpacity onPress={handlePress}>
           <Text style={styles.title}>{title}</Text>
         </TouchableOpacity>
-        <Text style={styles.subtitle}>{summary}</Text>
+        <Text style={styles.subtitle}>{summary.substring(0, 100)}...</Text>
       </View>
       <Image
         source={require("../assets/images/news.png")}
@@ -53,11 +53,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 4,
-    color: "#2e3cff",
+    // color: "#2e3cff",
+    color: "black",
   },
   subtitle: {
     fontSize: 14,
     color: "#666666",
+    textAlign: "justify",
   },
   image: {
     width: 100,

@@ -1,5 +1,6 @@
 import {
   BackHandler,
+  Keyboard,
   StyleSheet,
   Text,
   TextInput,
@@ -14,7 +15,7 @@ const Search = ({
   typedText,
   handleFocus,
   handleBlur,
-  handlSubmt,
+  handleSubmit,
 }) => {
   const textInputRef = useRef(null);
   useEffect(() => {
@@ -27,9 +28,25 @@ const Search = ({
     };
 
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-
     return () => {
       BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+    };
+  }, []);
+
+  useEffect(() => {
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        if (textInputRef.current) {
+          textInputRef.current.focus();
+        }
+        // Here, you can handle hiding the keyboard without blurring the input
+        // You may also want to perform some actions when the keyboard hides, if necessary
+      }
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
     };
   }, []);
 
@@ -57,6 +74,7 @@ const Search = ({
         placeholder="Search"
         keyboardType="web-search"
         enterKeyHint="search"
+        onSubmitEditing={handleSubmit}
       />
 
       <TouchableOpacity
@@ -70,7 +88,7 @@ const Search = ({
           borderBottomEndRadius: 30,
           borderWidth: 0,
         }}
-        onPress={handlSubmt}
+        onPress={handleSubmit}
       >
         <Icons name="search" size={26} />
       </TouchableOpacity>

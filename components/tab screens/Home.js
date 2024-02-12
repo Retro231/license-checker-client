@@ -1,12 +1,13 @@
 import {
   FlatList,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Icons from "@expo/vector-icons/MaterialIcons";
 import Header from "../Header";
@@ -15,6 +16,7 @@ import { homeOptions } from "../../assets/api/homeOptions";
 import { companyHouseSearch } from "../../helper/companyHouseSearch";
 import { getSearchResult } from "../../helper/getSearchResult";
 import Loading from "./../utils/Loading";
+import { useSelector } from "react-redux";
 const Home = () => {
   const navigation = useNavigation();
   const [typedText, setTypedText] = useState("");
@@ -23,6 +25,10 @@ const Home = () => {
   const [notfound, setNotfound] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
+  const { activeOrg, newAddedOrg, removedOrg } = useSelector(
+    (state) => state.app
+  );
+  console.log(activeOrg.totalItem);
   const handleFocus = () => {
     console.log("focus");
     setIsFocused(true);
@@ -37,25 +43,27 @@ const Home = () => {
   };
 
   const handleSubmit = async () => {
-    setLoading(true);
-    const result = await getSearchResult(typedText);
-    setLoading(false);
+    if (typedText !== "") {
+      setLoading(true);
+      const result = await getSearchResult(typedText);
+      setLoading(false);
 
-    if (result === null) {
-      setNotfound(true);
-      setTimeout(() => {
-        setNotfound(false);
-      }, 2000);
-    }
+      if (result === null) {
+        setNotfound(true);
+        setTimeout(() => {
+          setNotfound(false);
+        }, 2000);
+      }
 
-    if (typedText !== "" && result?.relatedResult === null) {
-      navigation.navigate("SearchResult", { result });
+      if (typedText !== "" && result?.relatedResult === null) {
+        navigation.navigate("SearchResult", { result });
+      }
+      if (typedText !== "" && result?.relatedResult !== null) {
+        setSuggestions(result?.relatedResult);
+        console.log(result?.relatedResult);
+      }
+      setTypedText("");
     }
-    if (typedText !== "" && result?.relatedResult !== null) {
-      setSuggestions(result?.relatedResult);
-      console.log(result?.relatedResult);
-    }
-    setTypedText("");
   };
 
   const handleSelection = async (item) => {
@@ -64,6 +72,10 @@ const Home = () => {
     navigation.navigate("SearchResult", { result });
     setLoading(false);
     setSuggestions([]);
+  };
+
+  const handleOptionPress = (caption) => {
+    navigation.navigate("HomeOption", { caption });
   };
 
   return (
@@ -83,7 +95,7 @@ const Home = () => {
           typedText={typedText}
           handleFocus={handleFocus}
           handleBlur={handleBlur}
-          handlSubmt={handleSubmit}
+          handleSubmit={handleSubmit}
         />
         {isFocused && (
           <View
@@ -171,14 +183,22 @@ const Home = () => {
                     size={24}
                     style={{ color: item.color }}
                   />
-                  <Text style={[styles.text, { fontWeight: 600 }]}>
-                    {item.title}
-                  </Text>
+                  <TouchableOpacity
+                    onPress={() => handleOptionPress(item.caption)}
+                  >
+                    <Text style={[styles.text, { fontWeight: 600 }]}>
+                      {item.title}
+                    </Text>
+                  </TouchableOpacity>
                 </View>
                 <View
                   style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
                 >
-                  <Text style={[styles.text]}>{item.value}</Text>
+                  <Text style={[styles.text]}>
+                    {item.caption === "active" && activeOrg.totalItem}
+                    {item.caption === "new" && newAddedOrg.totalItem}
+                    {item.caption === "remove" && removedOrg.totalItem}
+                  </Text>
                   <Icons name={item.valueIndicatorUp} size={24} />
                 </View>
               </View>
