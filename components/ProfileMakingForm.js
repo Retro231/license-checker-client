@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import ProfileFormInput from "./ProfileFormInput";
-import Search from "./Search";
 import Loading from "./utils/Loading";
 import { getSearchResult } from "../helper/getSearchResult";
 import { companyHouseSearch } from "../helper/companyHouseSearch";

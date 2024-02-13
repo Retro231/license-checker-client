@@ -11,10 +11,10 @@ const ProfileActionBtn = ({ status, handlePress }) => {
         paddingHorizontal: 6,
         borderRadius: 15,
         borderColor: `${
-          status === "delete" || "discard" ? "#F11414" : "#039EBD"
+          status === "delete" || status === "discard" ? "#F11414" : "#039EBD"
         }`,
         backgroundColor: `${
-          status === "delete" || "discard"
+          status === "delete" || status === "discard"
             ? "rgba(223, 0, 0, 0.20)"
             : "rgba(3, 158, 189, 0.12)"
         }`,
@@ -31,21 +31,31 @@ const ProfileActionBtn = ({ status, handlePress }) => {
             <Icons
               name={status === "delete" ? "delete-outline" : "sync"}
               size={14}
-              color={status === "delete" || "discard" ? "#F11414" : "#039EBD"}
+              color={
+                status === "delete" || status === "discard"
+                  ? "#F11414"
+                  : "#039EBD"
+              }
             />
           )}
           {status === "discard" && (
             <Icons
               name={"cancel"}
               size={14}
-              color={status === "delete" || "discard" ? "#F11414" : "#039EBD"}
+              color={
+                status === "delete" || status === "discard"
+                  ? "#F11414"
+                  : "#039EBD"
+              }
             />
           )}
 
           <Text
             style={{
               color: `${
-                status === "delete" || "discard" ? "#F11414" : "#039EBD"
+                status === "delete" || status === "discard"
+                  ? "#F11414"
+                  : "#039EBD"
               }`,
               fontSize: 10,
               textTransform: "capitalize",
