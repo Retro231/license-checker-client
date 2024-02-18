@@ -1,13 +1,14 @@
 export const getNews = async () => {
+  const apiEndPoint = `https://codebothub.com/company`;
   try {
-    const response = await fetch(`http://192.168.0.104:3000/newsfeed`);
+    const response = await fetch(`${apiEndPoint}/news/newsfeed`);
 
     if (!response.ok) {
       throw new Error("Network request failed");
     }
 
     const json = await response.json();
-    return json.data;
+    return json;
   } catch (error) {
     console.error("Error fetching dummy JSON:", error.message);
   }
