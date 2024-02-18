@@ -16,6 +16,7 @@ import { setUser } from "../slices/appSlice";
 import { useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ProfileActionBtn from "./utils/ProfileActionBtn";
+import DatePicker from "react-native-date-picker";
 
 const ProfileMakingForm = () => {
   // text inputs state
@@ -31,6 +32,9 @@ const ProfileMakingForm = () => {
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [companyError, setCompanyError] = useState("");
+  // date picker
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
   // others state
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -68,6 +72,7 @@ const ProfileMakingForm = () => {
     setCompany(text);
     if (!text) {
       setCompanyError("Company is required");
+      setSuggestions([]);
     } else {
       setCompanyError("");
     }
@@ -75,24 +80,28 @@ const ProfileMakingForm = () => {
       setAddress("");
       setLicense_tier("");
       setStatus("");
+      setSuggestions([]);
     }
   };
 
   const handleVisaExpiryChages = (inputDate) => {
-    // Regex to match DD-MM-YYYY format
-    const regex = /^(\d{1,2})-(\d{1,2})-(\d{4})$/;
+    setVisaExpiry(inputDate);
+  };
 
-    if (regex.test(inputDate)) {
-      setVisaExpiry(inputDate);
-    }
+  const formatDate = (inputDate) => {
+    const date = new Date(inputDate);
+
+    const year = date.getFullYear().toString();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
+
+    return `${day}-${month}-${year}`;
   };
 
   const handleFocus = () => {
-    console.log("focus");
     setIsFocused(true);
   };
   const handleBlur = () => {
-    console.log("blur");
     setIsFocused(false);
   };
 
@@ -105,6 +114,7 @@ const ProfileMakingForm = () => {
     setStatus("");
     setVisaExpiry("");
     setSuggestions([]);
+    setLoading(false);
   };
 
   const handleSubmit = async () => {
@@ -160,7 +170,6 @@ const ProfileMakingForm = () => {
   };
 
   const handleSave = async () => {
-    console.log("preesed");
     try {
       setSaving(true);
       const jsonValue = {
@@ -174,8 +183,6 @@ const ProfileMakingForm = () => {
       };
       await storeData(jsonValue);
       dispatch(setUser(jsonValue));
-      console.log("done");
-
       setSaving(false);
     } catch (e) {
       console.log(e);
@@ -342,12 +349,48 @@ const ProfileMakingForm = () => {
         {/* --------- input ----------- */}
         {address !== "" && company !== "" && (
           <>
-            <ProfileFormInput
-              title={"Visa Expiry"}
-              value={visaExpiry}
-              handleInputChange={handleVisaExpiryChages}
-              placeholder={"Enter date (DD-MM-YYYY)"}
-              keyboardType={"numeric"}
+            <Text
+              style={{
+                marginBottom: 5,
+                marginLeft: 10,
+                fontWeight: "600",
+                color: "#676767",
+              }}
+            >
+              {`Visa Expiry`}
+              <Text style={{ color: "red" }}></Text>
+            </Text>
+            <TouchableOpacity onPress={() => setOpen(true)}>
+              <Text
+                style={{
+                  height: 40,
+                  padding: 10,
+                  borderWidth: 1,
+                  borderColor: "#039EBD",
+                  borderRadius: 15,
+                  color: `${visaExpiry === "" ? "gray" : "black"}`,
+                }}
+              >
+                {visaExpiry}
+                {visaExpiry === "" && "Enter date (DD-MM-YYYY)"}
+              </Text>
+            </TouchableOpacity>
+            {/* <Button title="Open" onPress={() => setOpen(true)} /> */}
+            <DatePicker
+              modal
+              open={open}
+              date={date}
+              mode="date"
+              onConfirm={(date) => {
+                setOpen(false);
+                setDate(date);
+                handleVisaExpiryChages(formatDate(date));
+              }}
+              onCancel={() => {
+                setOpen(false);
+                setVisaExpiry("");
+              }}
+              cancelText="Discard"
             />
           </>
         )}

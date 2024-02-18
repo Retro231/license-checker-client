@@ -8,8 +8,6 @@ import HeaderNavigate from "../HeaderNavigate";
 const SearchResult = () => {
   const route = useRoute();
   const { result } = route.params;
-  console.log("SearchResult", result);
-
   return (
     <View style={styles.container}>
       <HeaderNavigate />

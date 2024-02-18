@@ -1,4 +1,4 @@
-import { Button, FlatList, StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 import React from "react";
 import ProfileInfoCard from "./ProfileInfoCard";
 

@@ -9,7 +9,7 @@ const Header = () => {
   const { user } = useSelector((state) => state.app);
   const navigation = useNavigation();
 
-  console.log(user);
+  // console.log(user);
   return (
     <SafeAreaView style={styles.container}>
       <View

@@ -7,8 +7,8 @@ const ResultCard = ({ result }) => {
   // "license_tier": "Worker (A rating), Skilled Worker",
   // "status": "active",
   // "relatedResult": null
-  console.log("resultCard", result);
-  console.log(result.address);
+  // console.log("resultCard", result);
+  // console.log(result.address);
   return (
     <View
       style={{
@@ -29,7 +29,7 @@ const ResultCard = ({ result }) => {
       <Text style={styles.TextWrapper}>License_tier:</Text>
       <Text style={styles.text}>
         {result?.license_tier ? result.license_tier : "Not found"}
-      </Text>  
+      </Text>
       <Text style={styles.TextWrapper}>Status:</Text>
       <Text style={styles.text}>
         {result?.status ? result.status : "Not found"}

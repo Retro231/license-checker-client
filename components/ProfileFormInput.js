@@ -11,6 +11,7 @@ const ProfileFormInput = ({
   handleFocus,
   handleBlur,
   handleSubmit,
+  handleEditable,
 }) => {
   return (
     <View style={{ marginVertical: 2 }}>
@@ -41,6 +42,7 @@ const ProfileFormInput = ({
         keyboardType={keyboardType}
         enterKeyHint={title === "Company" ? "search" : "enter"}
         onSubmitEditing={handleSubmit}
+        editable={handleEditable}
       />
     </View>
   );

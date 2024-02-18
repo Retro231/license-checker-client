@@ -23,7 +23,7 @@ import ProfileActionBtn from "../utils/ProfileActionBtn";
 const Profile = () => {
   const { user } = useSelector((state) => state.app);
   const dispatch = useDispatch();
-  console.log(user);
+  // console.log(user);
   const [loading, setLoading] = useState(false);
 
   const calculateRemainingDays = (startDate, endDate = "01-01-2001") => {
@@ -175,7 +175,11 @@ const Profile = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  Remaining: {remainingDays}
+                  {` ${
+                    remainingDays < 0
+                      ? "Visa Expired"
+                      : "Remaining: " + remainingDays
+                  }`}
                 </Text>
               )}
             </>

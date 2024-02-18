@@ -28,16 +28,9 @@ const Home = () => {
   const { activeOrg, newAddedOrg, removedOrg } = useSelector(
     (state) => state.app
   );
-  console.log(activeOrg?.totalItem);
   const handleFocus = () => {
-    console.log("focus");
     setIsFocused(true);
   };
-  const handleBlur = () => {
-    console.log("blur");
-    setIsFocused(false);
-  };
-
   const handleTextChange = (text) => {
     setTypedText(text);
   };
@@ -60,7 +53,6 @@ const Home = () => {
       }
       if (typedText !== "" && result?.relatedResult !== null) {
         setSuggestions(result?.relatedResult);
-        console.log(result?.relatedResult);
       }
       setTypedText("");
     }

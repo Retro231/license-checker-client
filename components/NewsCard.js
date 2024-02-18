@@ -6,7 +6,7 @@ const NewsCard = ({ link, title, summary }) => {
   const navigation = useNavigation();
   const handlePress = () => {
     navigation.navigate("NewsViewer", { uri: link });
-    console.log(link);
+    // console.log(link);
   };
   return (
     <View style={styles.card}>
