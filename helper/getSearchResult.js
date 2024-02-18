@@ -1,10 +1,9 @@
 /** Fuction to get search result from api */
 export const getSearchResult = async (companyName) => {
   const encodedInput = encodeURIComponent(companyName);
+  const apiEndPoint = `https://codebothub.com/company`;
   try {
-    const response = await fetch(
-      `http://192.168.0.104:3000/company/${encodedInput}`
-    );
+    const response = await fetch(`${apiEndPoint}/${encodedInput}`);
 
     if (!response.ok) {
       throw new Error("Network request failed");

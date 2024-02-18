@@ -4,16 +4,16 @@
  * @param pageIndex - Number
  * @param pageSize - Number (optional) default value: 20
  * */
-
 export const getHomeOptionsData = async (type, pageIndex, pageSize) => {
+  const apiEndPoint = `https://codebothub.com/company`;
   try {
     let url;
     if (type === "active") {
-      url = `http://192.168.0.104:3000/activeOrg/${pageIndex}/${pageSize}?`;
+      url = `${apiEndPoint}/activeOrg/${pageIndex}/${pageSize}?`;
     } else if (type === "newAdded") {
-      url = `http://192.168.0.104:3000/newAddedOrg/${pageIndex}/${pageSize}?`;
+      url = `${apiEndPoint}/newAddedOrg/${pageIndex}/${pageSize}?`;
     } else {
-      url = `http://192.168.0.104:3000/removedOrg/${pageIndex}/${pageSize}?`;
+      url = `${apiEndPoint}/removedOrg/${pageIndex}/${pageSize}?`;
     }
 
     const response = await fetch(url);

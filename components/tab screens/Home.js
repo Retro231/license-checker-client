@@ -28,7 +28,7 @@ const Home = () => {
   const { activeOrg, newAddedOrg, removedOrg } = useSelector(
     (state) => state.app
   );
-  console.log(activeOrg.totalItem);
+  console.log(activeOrg?.totalItem);
   const handleFocus = () => {
     console.log("focus");
     setIsFocused(true);
@@ -252,9 +252,9 @@ const Home = () => {
                 style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
               >
                 <Text style={[styles.text]}>
-                  {item.caption === "active" && activeOrg.totalItem}
-                  {item.caption === "new" && newAddedOrg.totalItem}
-                  {item.caption === "remove" && removedOrg.totalItem}
+                  {item.caption === "active" && activeOrg?.totalItem}
+                  {item.caption === "new" && newAddedOrg?.totalItem}
+                  {item.caption === "remove" && removedOrg?.totalItem}
                 </Text>
                 <Icons name={item.valueIndicatorUp} size={24} />
               </View>

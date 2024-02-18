@@ -1,9 +1,8 @@
 const getData = async (name) => {
   const encodedInput = encodeURIComponent(name);
+  const apiEndPoint = `https://codebothub.com/company`;
   try {
-    const response = await fetch(
-      `http://192.168.0.104:3000/companyhouse/${encodedInput}`
-    );
+    const response = await fetch(`${apiEndPoint}/companyhouse/${encodedInput}`);
 
     if (!response.ok) {
       throw new Error("Network request failed");
