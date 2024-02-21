@@ -31,6 +31,10 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+// onesignal
+import { LogLevel, OneSignal } from "react-native-onesignal";
+import Constants from "expo-constants";
+import Menu from "./components/tab screens/Menu";
 
 const TabScreens = () => {
   const dispatch = useDispatch();
@@ -74,6 +78,8 @@ const TabScreens = () => {
                 iconName = "chat";
               } else if (route.name === "Profile") {
                 iconName = "account-circle";
+              } else if (route.name === "Menu") {
+                iconName = "menu";
               }
               // You can return any component that you like here!
               return <Icons name={iconName} size={size} color={color} />;
@@ -90,8 +96,9 @@ const TabScreens = () => {
         >
           <Tab.Screen name="Home" component={Home} />
           <Tab.Screen name="NewsFeed" component={NewsFeed} />
-          <Tab.Screen name="Discussion" component={Discussion} />
           <Tab.Screen name="Profile" component={Profile} />
+          <Tab.Screen name="Discussion" component={Discussion} />
+          <Tab.Screen name="Menu" component={Menu} />
         </Tab.Navigator>
       ) : (
         <View
@@ -116,6 +123,11 @@ const StackScreens = () => {
 };
 
 export default function App() {
+  OneSignal.Debug.setLogLevel(LogLevel.Verbose);
+  OneSignal.initialize(Constants.expoConfig.extra.oneSignalAppId);
+
+  // Also need enable notifications to complete OneSignal setup
+  OneSignal.Notifications.requestPermission(true);
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={"#039EBD"} />

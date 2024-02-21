@@ -1,16 +1,37 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import Icons from "@expo/vector-icons/MaterialIcons";
+import Clipboard from "@react-native-clipboard/clipboard";
 
 const ProfileInfoCard = ({ icon, title, value }) => {
+  const [isCopied, setIsCopied] = useState(false);
+  const handleCopy = () => {
+    Clipboard.setString(`${title}: ${value}`);
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
+  };
   return (
-    <View style={styles.card}>
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subtitle}>{value}</Text>
+    <TouchableOpacity activeOpacity={1} onLongPress={handleCopy}>
+      <View style={styles.card}>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subtitle}>{value}</Text>
+          <View style={styles.copyToast}>
+            <TouchableOpacity onPress={handleCopy}>
+              <Text style={styles.copyToastText}>
+                <Icons name="content-copy" color={"#039EBD"} size={14} />
+                {`${isCopied ? " Copied" : ""}`}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.verticalDivider}></View>
+        <Image source={icon} style={styles.image} />
       </View>
-      <View style={styles.verticalDivider}></View>
-      <Image source={icon} style={styles.image} />
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -60,5 +81,18 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#e0e0e0",
     marginHorizontal: 8,
+  },
+  copyToast: {
+    position: "absolute",
+    width: 70,
+    height: 30,
+    // backgroundColor: "black",
+    top: 0,
+    right: 0,
+  },
+  copyToastText: {
+    color: "#039EBD",
+    textAlign: "right",
+    fontWeight: "bold",
   },
 });

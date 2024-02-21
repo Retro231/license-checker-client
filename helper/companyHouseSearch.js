@@ -16,13 +16,10 @@ const getData = async (name) => {
 };
 
 const capitalizeFirstLetter = (str) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
 const capitalizeEachWord = (sentence) => {
-  return sentence
-    .split(" ")
-    .map((word) => capitalizeFirstLetter(word))
-    .join(" ");
+  return capitalizeFirstLetter(sentence);
 };
 
 const getAdditoinalInfo = async (name) => {
@@ -40,10 +37,16 @@ const getAdditoinalInfo = async (name) => {
       title === lowercase ||
       title === capitalizedSentence
     ) {
-      const status = capitalizeEachWord(data[i].company_status);
-      const address_snippet = data[i].address_snippet;
-
-      return { status, address_snippet };
+      if (data[i].company_status !== null && data[i].address_snippet !== null) {
+        const status = capitalizeEachWord(data[i].company_status);
+        const address_snippet = data[i].address_snippet;
+        return { status, address_snippet };
+      } else if (
+        data[i].company_status === null &&
+        data[i].address_snippet !== null
+      ) {
+        return { status: null, address_snippet: data[i].address_snippet };
+      }
     }
   }
   return null;

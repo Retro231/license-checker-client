@@ -11,11 +11,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "<your_build_number_here>",
+      "bundleIdentifier": "<your_bundle_identifier_here>"
     },
     "android": {
       "adaptiveIcon": {
@@ -37,8 +37,17 @@
     "extra": {
       "eas": {
         "projectId": "c12fbb73-d466-440b-996a-17521fa79cbc"
-      }
+      },
+      "oneSignalAppId": "20072f9e-8a0d-4397-a024-3302b7dad88e"
     },
-    "owner": "retrosoftltd"
+    "owner": "retrosoftltd",
+    "plugins": [
+      [
+        "onesignal-expo-plugin",
+        {
+          "mode": "development"
+        }
+      ]
+    ]
   }
 }

@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "white" },
   news_area: {
     flex: 7,
-    margin: 10,
+    marginHorizontal: 10,
   },
   title: {
     color: "#039EBD",
