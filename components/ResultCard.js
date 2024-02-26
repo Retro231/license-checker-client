@@ -37,16 +37,30 @@ const ResultCard = ({ result }) => {
         <Text style={[styles.text, { textTransform: "none" }]}>
           {result?.company_name ? result.company_name : "Not found"}
         </Text>
+
+        <View style={styles.divider}></View>
         <Text style={styles.TextWrapper}>Address:</Text>
         <Text style={styles.text}>
           {result?.address ? result.address : "Not found"}
         </Text>
+        <View style={styles.divider}></View>
+
         <Text style={styles.TextWrapper}>License_tier:</Text>
         <Text style={styles.text}>
           {result?.license_tier ? result.license_tier : "Not found"}
         </Text>
+        <View style={styles.divider}></View>
+
         <Text style={styles.TextWrapper}>Status:</Text>
-        <Text style={styles.text}>
+        <Text
+          style={[
+            styles.text,
+            {
+              color: `${result?.status ? "green" : "red"}`,
+              fontWeight: "bold",
+            },
+          ]}
+        >
           {result?.status ? result.status : "Not found"}
         </Text>
         <View style={styles.copyToast}>
@@ -86,5 +100,9 @@ const styles = StyleSheet.create({
     color: "#039EBD",
     textAlign: "right",
     fontWeight: "bold",
+  },
+  divider: {
+    borderWidth: 0.3,
+    borderColor: "#d4d4d4",
   },
 });

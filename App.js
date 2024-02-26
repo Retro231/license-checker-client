@@ -35,6 +35,8 @@ const Stack = createStackNavigator();
 import { LogLevel, OneSignal } from "react-native-onesignal";
 import Constants from "expo-constants";
 import Menu from "./components/tab screens/Menu";
+import About from "./components/stack screens/About";
+import PrivacyPolicy from "./components/stack screens/PrivacyPolicy";
 
 const TabScreens = () => {
   const dispatch = useDispatch();
@@ -118,6 +120,8 @@ const StackScreens = () => {
       <Stack.Screen name="SearchResult" component={SearchResult} />
       <Stack.Screen name="NewsViewer" component={NewsViewer} />
       <Stack.Screen name="HomeOption" component={HomeOption} />
+      <Stack.Screen name="About" component={About} />
+      <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
     </Stack.Navigator>
   );
 };

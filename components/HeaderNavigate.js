@@ -45,15 +45,16 @@ const HeaderNavigate = () => {
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
             <Image
               style={{
-                width: 70,
-                height: 70,
+                width: 50,
+                height: 50,
+                marginLeft: 10,
               }}
               source={require("../assets/images/profile.png")}
             />
             {!user ? (
               <Text
                 style={{
-                  marginTop: -10,
+                  marginTop: -5,
                   color: "#039EBD",
                   textAlign: "center",
                   fontWeight: "bold",
@@ -65,7 +66,7 @@ const HeaderNavigate = () => {
             ) : (
               <Text
                 style={{
-                  marginTop: -10,
+                  marginTop: -5,
                   textTransform: "capitalize",
                   color: "green",
                 }}

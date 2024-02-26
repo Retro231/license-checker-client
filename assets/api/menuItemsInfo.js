@@ -5,6 +5,7 @@ export const menuItemsInfo = [
     icon: "info",
     data: ["some data", "some data"],
     url: "",
+    status: "about",
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const menuItemsInfo = [
     icon: "article",
     data: ["some data", "some data"],
     url: "",
+    status: "privacy",
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ export const menuItemsInfo = [
     icon: "stars",
     data: ["some data", "some data"],
     url: "",
+    status: "rate",
   },
   {
     id: 4,
@@ -26,6 +29,7 @@ export const menuItemsInfo = [
     icon: "email",
     data: ["some data", "some data"],
     url: "",
+    status: "email",
   },
   {
     id: 5,
@@ -33,5 +37,6 @@ export const menuItemsInfo = [
     icon: "exit-to-app",
     data: ["some data", "some data"],
     url: "",
+    status: "exit",
   },
 ];

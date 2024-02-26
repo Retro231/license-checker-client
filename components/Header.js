@@ -21,41 +21,47 @@ const Header = () => {
           marginVertical: 10,
         }}
       >
-        <View style={{ alignItems: "center" }}>
+        <Image
+          style={{
+            width: 100,
+            height: 70,
+          }}
+          source={require("../assets/icon.png")}
+          resizeMode="center"
+        />
+        <TouchableOpacity
+          style={{
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+          onPress={() => navigation.navigate("Profile")}
+        >
           <Image
-            width={50}
-            height={50}
-            source={require("../assets/images/logo.png")}
+            style={{
+              width: 50,
+              height: 50,
+              marginLeft: 10,
+            }}
+            source={require("../assets/images/profile.png")}
           />
-        </View>
-        <View>
-          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-            <Image
+          {!user ? (
+            <Text
               style={{
-                width: 70,
-                height: 70,
+                marginTop: -5,
+                color: "#039EBD",
+                textAlign: "center",
+                fontWeight: "bold",
+                textTransform: "capitalize",
               }}
-              source={require("../assets/images/profile.png")}
-            />
-            {!user ? (
-              <Text
-                style={{
-                  marginTop: -10,
-                  color: "#039EBD",
-                  textAlign: "center",
-                  fontWeight: "bold",
-                  textTransform: "capitalize",
-                }}
-              >
-                Add Profile
-              </Text>
-            ) : (
-              <Text style={{ marginTop: -10, color: "green" }}>
-                <Icons name="circle" color={"green"} /> {user.status}
-              </Text>
-            )}
-          </TouchableOpacity>
-        </View>
+            >
+              Add Profile
+            </Text>
+          ) : (
+            <Text style={{ marginTop: -5, color: "green" }}>
+              <Icons name="circle" color={"green"} /> {user.status}
+            </Text>
+          )}
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

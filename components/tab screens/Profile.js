@@ -48,7 +48,7 @@ const Profile = () => {
       (timeDifference % millisecondsInMonth) / millisecondsInDay
     );
 
-    const output = `${remainingYears >= 1 ? remainingYears + " years," : ""}${
+    const output = `${remainingYears >= 1 ? remainingYears + " years, " : ""}${
       remainingMonths >= 1 ? remainingMonths + " months and" : ""
     } ${remainingDays} days`;
 
