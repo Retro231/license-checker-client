@@ -14,8 +14,8 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "<your_build_number_here>",
-      "bundleIdentifier": "<your_bundle_identifier_here>"
+      "buildNumber": "7196c102",
+      "bundleIdentifier": "com.retrosoftltd.ukworkpermitinfo"
     },
     "android": {
       "adaptiveIcon": {
